@@ -8,8 +8,8 @@
 
 library(tidyverse)
 library(mosaicData)
+
 # if you don't have mosaicData, install it
-#asdlkjasd
 
 data(Gestation)
 
@@ -22,29 +22,33 @@ count(Gestation)
 count(Gestation, race)
 
 # number of observations by racial group and level of mother's education
-Gestation_n_race_ed <- count(Gestation, ...)
-
+Gestation_n_race_ed <- count(Gestation, race, ed)
+group_by(Gestation_n_race_ed, race)
 
 # Activity 2 - Further summary statistics
 
 # mean age of mothers across all births
+summarise(Gestation, 
+          mean_age = mean(age, na.rm=T))
+          
 # ensure you use a human friendly name for the value you're creating
 
 # calculate both mothers' mean age and babies' mean weight
 summarise(Gestation, 
-          `Mean age` = ...,
-          `Mean wt`  = ...)
-
+          mean_age = mean(age, na.rm=T),
+          mean_wt  = mean(wt, na.rm=T))
 
 # Activity 3 - Grouped summaries
 
 # make a new data frame containing only id, age and race variables
+Gestation_id_age_race <- count(Gestation, id, age, race)
 
 # calculate the mean age by race
-
+Gestation_id_age_race <- group_by(Gestation, race)
+summarise(Gestation_id_age_race, 
+          mean_age_race = mean(age, na.rm=T))
 
 # Activity 4 - Extensions
-
 
 # Activity 4a - Correlation
 
